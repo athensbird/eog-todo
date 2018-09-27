@@ -1,4 +1,4 @@
-export const tasks = [
+export const taskList = [
   {
     id: "78H3K3",
     title: "637 Homework",

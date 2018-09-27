@@ -1,8 +1,7 @@
 import React from "react";
 import Task from './Task';
-import { tasks } from '../data/tasks';
 
-const TaskList = () => {
+const TaskList = ({ tasks }) => {
   return tasks.map(task => (
     <Task task={task} key={task.id} />
   ));
