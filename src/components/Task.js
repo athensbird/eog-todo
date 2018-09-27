@@ -4,6 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 
+import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({

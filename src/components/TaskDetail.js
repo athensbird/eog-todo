@@ -1,8 +1,9 @@
 import React, { Component }from 'react';
 import Button from "@material-ui/core/Button";
-import Chip from "@material-ui/core/Chip";
+import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
 
+import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
@@ -12,13 +13,9 @@ const styles = {
 class TaskDetail extends React.Component {
   constructor(props) {
     super(props);
-    const { task } = this.props;
-    this.state = {
-      id: task.id,
-      title: task.title,
-      description: task.description,
-      completed: task.completed,
-    };
+    const taskID = this.props.match.params.task_id;
+    const task = this.props.tasks.find(t => t.id === taskID);
+    this.state = { task };
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(field) {
@@ -30,24 +27,28 @@ class TaskDetail extends React.Component {
     };
   }
   render() {
+    const taskID = this.props.match.params.task_id;
+    const task = this.props.tasks.filter(t => t.id === taskID);
     return (
-      <div>
-        <Chip>Back to Tasks</Chip>
-        <TextField
-          id="title"
-          value={this.state.title}
-          onChange={this.handleChange("title")}
-        />
-        <Button>Complete</Button>
-        <TextField
-          id="description"
-          value={this.state.description}
-          onChange={this.handleChange("description")}
-        />
-        <Button>Save</Button>
-        <Button>Cancel</Button>
-        <Button>Delete</Button>
-      </div>
+      <Card>
+        {task && <div>
+          <Link to={"/task"}>Back to Tasks</Link>
+          <TextField
+            id="title"
+            value={this.state.task.title}
+            onChange={this.handleChange("title")}
+          />
+          <Button>Complete</Button>
+          <TextField
+            id="description"
+            value={this.state.task.description}
+            onChange={this.handleChange("description")}
+          />
+          <Button>Save</Button>
+          <Button>Cancel</Button>
+          <Button>Delete</Button>
+        </div>}
+      </Card>
     );
   }
 }
