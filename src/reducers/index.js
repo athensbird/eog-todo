@@ -22,8 +22,8 @@ const task = (state = {}, action) => {
 }
 
 const rootReducer = combineReducers({
+  task,
   tasks,
-  task
 });
 
 export default rootReducer;
