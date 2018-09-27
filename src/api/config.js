@@ -1,7 +1,7 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-export const API = "https://practiceapi.devmountain.com/api/";
+export const API = "https://practiceapi.devmountain.com/api";
 
 export const getHeaders = () => ({
   headers: {
@@ -12,6 +12,15 @@ export const getHeaders = () => ({
 
 export const postHeaders = (payload) => ({
   method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    body: JSON.stringify(payload),
+  },
+});
+
+export const patchHeaders = (payload) => ({
+  method: 'PATCH',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
