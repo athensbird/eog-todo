@@ -7,18 +7,32 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
-  listItem: {
+  title: {
     'text-align': 'center',
   },
+  titleText: {
+    color: 'rgb(200,100,25)',
+    'font-weight': '200',
+  },
+  description: {
+    'align': 'center',
+    margin: "0 25%",
+    'max-width': "50%",
+    'background-color': 'rgb(100,200,30)',
+    'height': '1rem',
+  }
 });
 
 const task = (props) => (
   <div>
     <List>
-      <ListItem className={props.classes.listItem}>
-        <ListItemText primary={props.task.title}/>
+      <ListItem className={props.classes.title}>
+        <ListItemText
+          className={props.classes.titleText}
+          primary={props.task.title}
+        />
       </ListItem>
-      <ListItem className={props.classes.listItem}>
+      <ListItem className={props.classes.description}>
         <ListItemText primary={props.task.description}/>
         <Checkbox checked={props.task.completed} />
       </ListItem>
