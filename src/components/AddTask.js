@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 
+const uuidv1 = require('uuid/v1');
+
 class AddTask extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,7 @@ class AddTask extends React.Component {
   }
   submitTask() {
     const task = {
-      id: "28dh24",
+      id: uuidv1(),
       title: this.state.taskTitle,
       description: "",
       completed: false,
