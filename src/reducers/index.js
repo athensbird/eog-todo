@@ -2,20 +2,28 @@ import { combineReducers } from 'redux';
 import { ADD_TASK } from '../actions';
 import { actionCollections } from '../actions';
 
-const task = (state = [], action) => {
+const tasks = (state = [], action) => {
   switch(action.type) {
     case actionCollections.ADD_TASK:
-      return {
+      return [
         ...state,
-        task: action.task,
-      };
+        action.task,
+      ];
+    default:
+      return state;
+  }
+}
+
+const task = (state = {}, action) => {
+  switch(action.type){
     default:
       return state;
   }
 }
 
 const rootReducer = combineReducers({
-  task,
+  tasks,
+  task
 });
 
 export default rootReducer;

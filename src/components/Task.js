@@ -20,11 +20,8 @@ const task = (props) => (
       </ListItem>
       <ListItem className={props.classes.listItem}>
         <ListItemText primary={props.task.description}/>
+        <Checkbox checked={props.task.completed} />
       </ListItem>
-      <ListItem className={props.classes.listItem}>
-        <ListItemText primary={props.task.completed}/>
-      </ListItem>
-      <Checkbox checked={props.task.completed} />
     </List>
   </div>
 );
