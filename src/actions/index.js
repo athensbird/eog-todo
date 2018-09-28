@@ -26,9 +26,10 @@ export const loadTasks = (params) => {
   }
 }
 
-export const updateTask = (task) => {
+export const updateTask = (params) => {
   return {
     type: actionCollections.UPDATE_TASK,
-    task,
+    task: params.task,
+    callback: params.callback,
   }
 }

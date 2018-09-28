@@ -50,10 +50,14 @@ class TaskDetail extends React.Component {
     const task = this.props.tasks.find(t => t.id == taskID);
     this.state = { task };
     this.handleChange = this.handleChange.bind(this);
+    this.navigateToList = this.navigateToList.bind(this);
     this.saveTask = this.saveTask.bind(this);
   }
   componentDidMount() {
     this.props.getTasks();
+  }
+  navigateToList() {
+    this.props.history.push('/task');
   }
   handleChange(field) {
     return (event) => {
@@ -67,7 +71,10 @@ class TaskDetail extends React.Component {
     };
   }
   saveTask() {
-    this.props.updateTask(this.state.task);
+    this.props.updateTask({
+      task: this.state.task,
+      callback: this.navigateToList,
+    });
   }
   render() {
     const taskID = this.props.match.params.task_id;

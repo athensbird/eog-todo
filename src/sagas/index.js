@@ -23,10 +23,7 @@ export function* addTaskSaga(action){
   console.log("addTaskSaga working...");
   try {
     const res = yield call(addTask, action.title);
-    yield put({
-      type: actionCollections.LOAD_TASKS,
-      tasks: res,
-    });
+    yield call(loadTasksSaga, res);
     yield call(delay, 100);
     yield call(action.callback);
   }
@@ -39,10 +36,7 @@ export function* getTasksSaga(){
   try{
     const res = yield call(getTasks);
     yield call(delay, 100);
-    yield put({
-      type: actionCollections.LOAD_TASKS,
-      tasks: res,
-    });
+    yield call(loadTasksSaga, res);
   }
   catch(error) {
     console.log(error);
@@ -54,18 +48,19 @@ export function* updateTaskSaga(action){
   try{
     const res = yield call(updateTask, action.task);
     yield call(delay, 100);
-    yield put({
-      type: actionCollections.LOAD_TASKS,
-      tasks: res,
-    });
+    yield call(loadTasksSaga, res);
+    yield call(action.callback);
   }
   catch(error) {
     console.log(error);
   }
 }
 
-export function* loadTasksSaga(action){
-
+export function* loadTasksSaga(res){
+  yield put({
+    type: actionCollections.LOAD_TASKS,
+    tasks: res,
+  });
 }
 
 export default function* rootSaga(){
