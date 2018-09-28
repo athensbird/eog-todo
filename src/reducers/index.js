@@ -4,7 +4,7 @@ import { actionCollections } from '../actions';
 import { taskList } from '../data/tasks';
 
 const tasks = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actionCollections.ADD_TASK:
       return state;
     case actionCollections.LOAD_TASKS:
@@ -15,7 +15,9 @@ const tasks = (state = [], action) => {
 }
 
 const task = (state = {}, action) => {
-  switch(action.type){
+  switch (action.type){
+    case actionCollections.LOAD_TASK:
+      return action.task;
     case actionCollections.UPDATE_TASK:
       return action.task;
     default:

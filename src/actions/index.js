@@ -1,6 +1,8 @@
 export const actionCollections = {
   ADD_TASK: "ADD_TASK",
+  GET_TASK: "GET_TASK",
   GET_TASKS: "GET_TASKS",
+  LOAD_TASK: "LOAD_TASK",
   LOAD_TASKS: "LOAD_TASKS",
   UPDATE_TASK: "UPDATE_TASK",
 }
@@ -13,10 +15,24 @@ export const addTask = (params) => {
   }
 }
 
+export const getTask = (id) => {
+  return {
+    type: actionCollections.GET_TASK,
+    id,
+  }
+}
+
 export const getTasks = () => {
-    return {
-      type: actionCollections.GET_TASKS,
-    }
+  return {
+    type: actionCollections.GET_TASKS,
+  }
+}
+
+export const loadTask = (task) => {
+  return {
+    type: actionCollections.GET_TASK,
+    task,
+  }
 }
 
 export const loadTasks = (params) => {

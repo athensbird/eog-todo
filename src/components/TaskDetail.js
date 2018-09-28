@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Card";
 import Paper from "@material-ui/core/Paper";
@@ -46,18 +46,27 @@ const styles = {
 class TaskDetail extends React.Component {
   constructor(props) {
     super(props);
-    const taskID = this.props.match.params.task_id;
-    const task = this.props.tasks.find(t => t.id == taskID);
-    this.state = { task };
-    this.initState = this.state;
-    
+    this.state = { task: this.props.task };
+
     this.cancelChange = this.cancelChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.navigateToList = this.navigateToList.bind(this);
     this.saveTask = this.saveTask.bind(this);
   }
+
+  componentWillReceiveProps(nextprops) {
+    if (nextprops.task !== this.state.task) {
+      this.setState({
+        task: nextprops.task,
+      }, () => {
+        this.initState = this.state;
+      });
+    }
+  }
+
   componentDidMount() {
-    this.props.getTasks();
+    const taskID = this.props.match.params.task_id;
+    this.props.getTask(taskID);
   }
   cancelChange() {
     this.setState({ task: this.initState.task });
@@ -83,8 +92,6 @@ class TaskDetail extends React.Component {
     });
   }
   render() {
-    const taskID = this.props.match.params.task_id;
-    const task = this.props.tasks.filter(t => t.id === taskID);
     const { classes } = this.props;
     return (
       <Grid className={classes.grid}>

@@ -11,6 +11,10 @@ export function* watchAddTask(){
   yield takeLatest("ADD_TASK", addTaskSaga);
 }
 
+export function* watchGetTask(){
+  yield takeLatest("GET_TASK", getTaskSaga);
+}
+
 export function* watchGetTasks(){
   yield takeLatest("GET_TASKS", getTasksSaga);
 }
@@ -28,6 +32,18 @@ export function* addTaskSaga(action){
     yield call(action.callback);
   }
   catch (error) {
+    console.log(error);
+  }
+}
+
+export function* getTaskSaga(action){
+  try{
+    const res = yield call(getTasks);
+    yield call(delay, 100);
+    const task = res.find(t => t.id == action.id);
+    yield call(loadTaskSaga, task);
+  }
+  catch(error) {
     console.log(error);
   }
 }
@@ -56,6 +72,13 @@ export function* updateTaskSaga(action){
   }
 }
 
+export function* loadTaskSaga(task){
+  yield put({
+    type: actionCollections.LOAD_TASK,
+    task,
+  })
+}
+
 export function* loadTasksSaga(res){
   yield put({
     type: actionCollections.LOAD_TASKS,
@@ -66,6 +89,7 @@ export function* loadTasksSaga(res){
 export default function* rootSaga(){
   yield all([
     watchAddTask(),
+    watchGetTask(),
     watchGetTasks(),
     watchUpdateTask(),
   ]);
