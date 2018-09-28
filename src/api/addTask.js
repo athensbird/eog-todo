@@ -1,5 +1,8 @@
 import { API, postHeaders, request } from "./config";
 
-const addTask = (task) => request(`${API}/tasks`, postHeaders(task));
+const addTask = (title) => {
+  const body = { title };
+  return request(`${API}/tasks`, postHeaders(body))
+};
 
 export default addTask;

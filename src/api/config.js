@@ -13,10 +13,9 @@ export const getHeaders = () => ({
 export const postHeaders = (payload) => ({
   method: 'POST',
   headers: {
-    Accept: 'application/json',
     'Content-Type': 'application/json',
-    body: JSON.stringify(payload),
   },
+  body: JSON.stringify(payload),
 });
 
 export const patchHeaders = (payload) => ({
@@ -24,8 +23,8 @@ export const patchHeaders = (payload) => ({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    body: JSON.stringify(payload),
   },
+  body: JSON.stringify(payload),
 });
 
 export const putHeaders = (payload) => ({
@@ -33,8 +32,8 @@ export const putHeaders = (payload) => ({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    body: JSON.stringify(payload),
   },
+  body: JSON.stringify(payload),
 });
 
 export const deleteHeaders = (payload) => ({
@@ -42,8 +41,8 @@ export const deleteHeaders = (payload) => ({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    body: JSON.stringify(payload),
   },
+  body: JSON.stringify(payload),
 });
 
 export const request = (url, header) => {

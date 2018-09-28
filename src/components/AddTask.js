@@ -2,25 +2,24 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 
-const uuidv1 = require('uuid/v1');
-
 class AddTask extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       taskTitle: "",
     }
+    this.resetTitle = this.resetTitle.bind(this);
     this.submitTask = this.submitTask.bind(this);
     this.updateTitle = this.updateTitle.bind(this);
   }
+  resetTitle() {
+    this.setState({ taskTitle: ""});
+  }
   submitTask() {
-    const task = {
-      id: uuidv1(),
+    this.props.addTask({
       title: this.state.taskTitle,
-      description: "",
-      completed: false,
-    };
-    this.props.addTask(task);
+      callback: this.resetTitle,
+    });
   }
   updateTitle(event) {
     const title = event.target.value;

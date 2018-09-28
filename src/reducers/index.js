@@ -6,10 +6,9 @@ import { taskList } from '../data/tasks';
 const tasks = (state = taskList, action) => {
   switch(action.type) {
     case actionCollections.ADD_TASK:
-      return [
-        ...state,
-        action.task,
-      ];
+      return state;
+    case actionCollections.LOAD_TASKS:
+      return action.tasks;
     default:
       return state;
   }

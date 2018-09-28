@@ -47,9 +47,12 @@ class TaskDetail extends React.Component {
   constructor(props) {
     super(props);
     const taskID = this.props.match.params.task_id;
-    const task = this.props.tasks.find(t => t.id === taskID);
+    const task = this.props.tasks.find(t => t.id == taskID);
     this.state = { task };
     this.handleChange = this.handleChange.bind(this);
+  }
+  componentDidMount() {
+    this.props.getTasks();
   }
   handleChange(field) {
     return (event) => {
@@ -68,7 +71,7 @@ class TaskDetail extends React.Component {
     const { classes } = this.props;
     return (
       <Grid className={classes.grid}>
-        {task && <Grid container="true">
+        {this.state.task && <Grid container="true">
           <Paper className={classes.row}>
             <Link to={"/task"}>Back to Tasks</Link>
           </Paper>
