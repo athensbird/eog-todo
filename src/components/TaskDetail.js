@@ -50,6 +50,7 @@ class TaskDetail extends React.Component {
     const task = this.props.tasks.find(t => t.id == taskID);
     this.state = { task };
     this.handleChange = this.handleChange.bind(this);
+    this.saveTask = this.saveTask.bind(this);
   }
   componentDidMount() {
     this.props.getTasks();
@@ -64,6 +65,9 @@ class TaskDetail extends React.Component {
         }
       });
     };
+  }
+  saveTask() {
+    this.props.updateTask(this.state.task);
   }
   render() {
     const taskID = this.props.match.params.task_id;
@@ -93,7 +97,7 @@ class TaskDetail extends React.Component {
             />
           </Paper>
           <Paper className={classes.row}>
-              <Button className={classes.save}>Save</Button>
+              <Button className={classes.save} onClick={this.saveTask}>Save</Button>
               <Button className={classes.cancel}>Cancel</Button>
               <Button className={classes.delete}>Delete</Button>
           </Paper>

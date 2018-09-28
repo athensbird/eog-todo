@@ -3,7 +3,7 @@ import { ADD_TASK } from '../actions';
 import { actionCollections } from '../actions';
 import { taskList } from '../data/tasks';
 
-const tasks = (state = taskList, action) => {
+const tasks = (state = [], action) => {
   switch(action.type) {
     case actionCollections.ADD_TASK:
       return state;
@@ -16,6 +16,8 @@ const tasks = (state = taskList, action) => {
 
 const task = (state = {}, action) => {
   switch(action.type){
+    case actionCollections.UPDATE_TASK:
+      return action.task;
     default:
       return state;
   }

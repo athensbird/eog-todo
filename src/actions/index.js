@@ -2,6 +2,7 @@ export const actionCollections = {
   ADD_TASK: "ADD_TASK",
   GET_TASKS: "GET_TASKS",
   LOAD_TASKS: "LOAD_TASKS",
+  UPDATE_TASK: "UPDATE_TASK",
 }
 
 export const addTask = (params) => {
@@ -22,5 +23,12 @@ export const loadTasks = (params) => {
   return {
     type: actionCollections.LOAD_TASKS,
     tasks: params.tasks,
+  }
+}
+
+export const updateTask = (task) => {
+  return {
+    type: actionCollections.UPDATE_TASK,
+    task,
   }
 }
