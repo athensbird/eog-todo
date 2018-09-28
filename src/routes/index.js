@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
 import TaskListContainer from "../containers/TaskListContainer";
-import TaskDetail from "../components/TaskDetail";
 import TaskDetailContainer from "../containers/TaskDetailContainer";
 import AddTaskContainer from "../containers/AddTaskContainer";
 

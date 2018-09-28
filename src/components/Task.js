@@ -26,7 +26,7 @@ const styles = (theme) => ({
 
 const task = (props) => (
   <div>
-    <List>
+    <List onClick={() => {props.history.push(`/task/${props.task.id}`)}}>
       <ListItem className={props.classes.title}>
         <ListItemText
           className={props.classes.titleText}
