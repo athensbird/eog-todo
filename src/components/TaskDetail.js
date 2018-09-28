@@ -41,6 +41,11 @@ const styles = {
   description: {
     width: '60%',
   },
+  loading: {
+    'margin': "20% 40%",
+    width: "20%",
+    'box-shadow': 'none',
+  }
 };
 
 class TaskDetail extends React.Component {
@@ -93,6 +98,10 @@ class TaskDetail extends React.Component {
   }
   render() {
     const { classes } = this.props;
+    const { loading } = this.props.task;
+    if (loading) {
+      return (<Paper className={classes.loading}>Loading the Details...</Paper>);
+    }
     return (
       <Grid className={classes.grid}>
         {this.state.task && <Grid container="true">

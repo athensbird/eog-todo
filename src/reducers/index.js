@@ -3,21 +3,37 @@ import { ADD_TASK } from '../actions';
 import { actionCollections } from '../actions';
 import { taskList } from '../data/tasks';
 
-const tasks = (state = [], action) => {
+const tasks = (state = {data: [], loading: false }, action) => {
   switch (action.type) {
     case actionCollections.ADD_TASK:
-      return state;
+      return {
+        ...state,
+        data: [],
+        loading: true,
+      };
     case actionCollections.LOAD_TASKS:
-      return action.tasks;
+      return {
+        ...state,
+        data: action.tasks,
+        loading: false,
+      };
     default:
       return state;
   }
 }
 
-const task = (state = {}, action) => {
+const task = (state = { loading: false }, action) => {
   switch (action.type){
     case actionCollections.LOAD_TASK:
-      return action.task;
+      return {
+        ...action.task,
+        loading: false,
+      };
+    case actionCollections.GET_TASK:
+      return {
+        ...state,
+        loading: true,
+      };
     case actionCollections.UPDATE_TASK:
       return action.task;
     default:
