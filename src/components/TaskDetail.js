@@ -55,7 +55,10 @@ class TaskDetail extends React.Component {
     return (event) => {
       const value = event.target.value;
       this.setState({
-        [field]: value,
+        task: {
+          ...this.state.task,
+          [field]: value,
+        }
       });
     };
   }
