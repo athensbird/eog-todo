@@ -131,6 +131,7 @@ class TaskDetail extends React.Component {
             />
             <Button
               className={classes.complete}
+              disabled={this.props.task.completed}
               onClick={this.completeTask}
             >Complete</Button>
           </Paper>

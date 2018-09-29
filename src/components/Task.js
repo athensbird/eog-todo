@@ -52,6 +52,7 @@ const task = (props) => (
         <ListItemText primary={props.task.description}/>
         <Checkbox
           checked={props.task.completed}
+          disabled={props.task.completed}
           onChange={() => {props.completeTask({task: props.task})}}
         />
         <Button onClick={() => {props.deleteTask({task: props.task })}}>X</Button>
