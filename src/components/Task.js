@@ -16,13 +16,20 @@ const styles = (theme) => ({
     color: 'rgb(200,100,25)',
     'font-weight': '200',
   },
-  description: {
+  descriptionPending: {
+    'align': 'center',
+    margin: "0 25%",
+    'max-width': "50%",
+    'background-color': 'rgb(200,100,30)',
+    'height': '1rem',
+  },
+  descriptionCompleted: {
     'align': 'center',
     margin: "0 25%",
     'max-width': "50%",
     'background-color': 'rgb(100,200,30)',
     'height': '1rem',
-  }
+  },
 });
 
 const task = (props) => (
@@ -37,9 +44,16 @@ const task = (props) => (
           primary={props.task.title}
         />
       </ListItem>
-      <ListItem className={props.classes.description}>
+      <ListItem
+        className={props.task.completed
+          ? props.classes.descriptionCompleted
+          : props.classes.descriptionPending
+        }>
         <ListItemText primary={props.task.description}/>
-        <Checkbox checked={props.task.completed} />
+        <Checkbox
+          checked={props.task.completed}
+          onChange={() => {props.completeTask({task: props.task})}}
+        />
         <Button onClick={() => {props.deleteTask({task: props.task })}}>X</Button>
       </ListItem>
     </List>

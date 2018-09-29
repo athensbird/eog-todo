@@ -1,5 +1,6 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 import addTask from "../api/addTask";
+import completeTask from "../api/completeTask";
 import deleteTask from "../api/deleteTask";
 import getTasks from "../api/getTasks";
 import updateTask from "../api/updateTask";
@@ -10,6 +11,10 @@ const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
 export function* watchAddTask(){
   yield takeLatest(actionCollections.ADD_TASK, addTaskSaga);
+}
+
+export function* watchCompleteTask(){
+  yield takeLatest(actionCollections.COMPLETE_TASK, completeTaskSaga);
 }
 
 export function* watchDeleteTask(){
@@ -41,6 +46,21 @@ export function* addTaskSaga(action){
   }
 }
 
+export function* completeTaskSaga(action){
+  console.log("completeTaskSaga working...");
+  try {
+    const res = yield call(completeTask, action.task);
+    yield call(delay, 100);
+    yield call(loadTasksSaga, res);
+    yield call(delay, 100);
+    if (action.callback) {
+      yield call(action.callback);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export function* deleteTaskSaga(action){
   console.log("deleteTaskSaga working...");
   try {
@@ -57,19 +77,18 @@ export function* deleteTaskSaga(action){
 }
 
 export function* getTaskSaga(action){
-  try{
+  try {
     const res = yield call(getTasks);
     yield call(delay, 100);
     const task = res.find(t => t.id == action.id);
     yield call(loadTaskSaga, task);
-  }
-  catch(error) {
+  } catch(error) {
     console.log(error);
   }
 }
 
 export function* getTasksSaga(){
-  try{
+  try {
     const res = yield call(getTasks);
     yield call(delay, 100);
     yield call(loadTasksSaga, res);
@@ -81,13 +100,12 @@ export function* getTasksSaga(){
 
 export function* updateTaskSaga(action){
   console.log("updateTaskSaga triggered...");
-  try{
+  try {
     const res = yield call(updateTask, action.task);
     yield call(delay, 100);
     yield call(loadTasksSaga, res);
     yield call(action.callback);
-  }
-  catch(error) {
+  } catch(error) {
     console.log(error);
   }
 }
@@ -109,6 +127,7 @@ export function* loadTasksSaga(res){
 export default function* rootSaga(){
   yield all([
     watchAddTask(),
+    watchCompleteTask(),
     watchDeleteTask(),
     watchGetTask(),
     watchGetTasks(),
