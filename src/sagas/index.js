@@ -43,11 +43,14 @@ export function* addTaskSaga(action){
 
 export function* deleteTaskSaga(action){
   console.log("deleteTaskSaga working...");
-  console.log(action);
   try {
     const res = yield call(deleteTask, action.task);
     yield call(delay, 100);
     yield call(loadTasksSaga, res);
+    yield call(delay, 100);
+    if (action.callback) {
+      yield call(action.callback);
+    }
   } catch (error) {
     console.log(error);
   }

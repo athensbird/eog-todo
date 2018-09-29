@@ -40,7 +40,7 @@ const task = (props) => (
       <ListItem className={props.classes.description}>
         <ListItemText primary={props.task.description}/>
         <Checkbox checked={props.task.completed} />
-        <Button onClick={() => {props.deleteTask(props.task)}}>X</Button>
+        <Button onClick={() => {props.deleteTask({task: props.task })}}>X</Button>
       </ListItem>
     </List>
   </div>

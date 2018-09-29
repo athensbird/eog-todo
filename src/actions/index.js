@@ -16,11 +16,11 @@ export const addTask = (params) => {
   }
 }
 
-export const deleteTask = (task) => {
-  console.log("deleting...", task);
+export const deleteTask = (params) => {
   return {
     type: actionCollections.DELETE_TASK,
-    task,
+    task: params.task,
+    callback: params.callback,
   }
 }
 

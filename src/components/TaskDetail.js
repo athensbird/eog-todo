@@ -57,6 +57,7 @@ class TaskDetail extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.navigateToList = this.navigateToList.bind(this);
     this.saveTask = this.saveTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   componentWillReceiveProps(nextprops) {
@@ -96,6 +97,12 @@ class TaskDetail extends React.Component {
       callback: this.navigateToList,
     });
   }
+  deleteTask() {
+    this.props.deleteTask({
+      task: this.state.task,
+      callback: this.navigateToList,
+    })
+  }
   render() {
     const { classes } = this.props;
     const { loading } = this.props.task;
@@ -128,7 +135,7 @@ class TaskDetail extends React.Component {
           <Paper className={classes.row}>
               <Button className={classes.save} onClick={this.saveTask}>Save</Button>
               <Button className={classes.cancel} onClick={this.cancelChange}>Cancel</Button>
-              <Button className={classes.delete}>Delete</Button>
+              <Button className={classes.delete} onClick={this.deleteTask} >Delete</Button>
           </Paper>
         </Grid>}
       </Grid>
