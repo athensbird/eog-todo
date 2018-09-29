@@ -16,6 +16,10 @@ class AddTask extends React.Component {
     this.setState({ taskTitle: ""});
   }
   submitTask() {
+    if (this.state.taskTitle === "") {
+      alert("plese enter a title!");
+      return;
+    }
     this.props.addTask({
       title: this.state.taskTitle,
       callback: this.resetTitle,

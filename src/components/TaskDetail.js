@@ -93,6 +93,10 @@ class TaskDetail extends React.Component {
     };
   }
   saveTask() {
+    if (this.state.task.title === "") {
+      alert("plese enter a title!");
+      return;
+    }
     this.props.updateTask({
       task: this.state.task,
       callback: this.navigateToList,
