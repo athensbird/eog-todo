@@ -57,6 +57,7 @@ class TaskDetail extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.navigateToList = this.navigateToList.bind(this);
     this.saveTask = this.saveTask.bind(this);
+    this.completeTask = this.completeTask.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
   }
 
@@ -97,6 +98,12 @@ class TaskDetail extends React.Component {
       callback: this.navigateToList,
     });
   }
+  completeTask() {
+    this.props.completeTask({
+      task: Object.assign({}, this.state.task, { completed: true }),
+      callback: this.navigateToList,
+    })
+  }
   deleteTask() {
     this.props.deleteTask({
       task: this.state.task,
@@ -122,7 +129,10 @@ class TaskDetail extends React.Component {
               value={this.state.task.title}
               onChange={this.handleChange("title")}
             />
-            <Button className={classes.complete}>Complete</Button>
+            <Button
+              className={classes.complete}
+              onClick={this.completeTask}
+            >Complete</Button>
           </Paper>
           <Paper className={classes.row}>
             <TextField

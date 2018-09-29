@@ -21,7 +21,7 @@ export const completeTask = (params) => {
   return {
     type: actionCollections.COMPLETE_TASK,
     task: params.task,
-    callback: params.callback, 
+    callback: params.callback,
   }
 }
 
