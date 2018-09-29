@@ -1,5 +1,6 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 import addTask from "../api/addTask";
+import deleteTask from "../api/deleteTask";
 import getTasks from "../api/getTasks";
 import updateTask from "../api/updateTask";
 import { API, postHeaders, request } from "../api/config";
@@ -8,19 +9,23 @@ import { actionCollections } from "../actions";
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
 export function* watchAddTask(){
-  yield takeLatest("ADD_TASK", addTaskSaga);
+  yield takeLatest(actionCollections.ADD_TASK, addTaskSaga);
+}
+
+export function* watchDeleteTask(){
+  yield takeLatest(actionCollections.DELETE_TASK, deleteTaskSaga);
 }
 
 export function* watchGetTask(){
-  yield takeLatest("GET_TASK", getTaskSaga);
+  yield takeLatest(actionCollections.GET_TASK, getTaskSaga);
 }
 
 export function* watchGetTasks(){
-  yield takeLatest("GET_TASKS", getTasksSaga);
+  yield takeLatest(actionCollections.GET_TASKS, getTasksSaga);
 }
 
 export function* watchUpdateTask(){
-  yield takeLatest("UPDATE_TASK", updateTaskSaga);
+  yield takeLatest(actionCollections.UPDATE_TASK, updateTaskSaga);
 }
 
 export function* addTaskSaga(action){
@@ -32,6 +37,18 @@ export function* addTaskSaga(action){
     yield call(action.callback);
   }
   catch (error) {
+    console.log(error);
+  }
+}
+
+export function* deleteTaskSaga(action){
+  console.log("deleteTaskSaga working...");
+  console.log(action);
+  try {
+    const res = yield call(deleteTask, action.task);
+    yield call(delay, 100);
+    yield call(loadTasksSaga, res);
+  } catch (error) {
     console.log(error);
   }
 }
@@ -89,6 +106,7 @@ export function* loadTasksSaga(res){
 export default function* rootSaga(){
   yield all([
     watchAddTask(),
+    watchDeleteTask(),
     watchGetTask(),
     watchGetTasks(),
     watchUpdateTask(),

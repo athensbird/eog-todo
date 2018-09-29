@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import Button from "@material-ui/core/Button";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -26,8 +27,11 @@ const styles = (theme) => ({
 
 const task = (props) => (
   <div>
-    <List onClick={() => {props.history.push(`/task/${props.task.id}`)}}>
-      <ListItem className={props.classes.title}>
+    <List>
+      <ListItem
+        className={props.classes.title}
+        onClick={() => {props.history.push(`/task/${props.task.id}`)}}
+      >
         <ListItemText
           className={props.classes.titleText}
           primary={props.task.title}
@@ -36,6 +40,7 @@ const task = (props) => (
       <ListItem className={props.classes.description}>
         <ListItemText primary={props.task.description}/>
         <Checkbox checked={props.task.completed} />
+        <Button onClick={() => {props.deleteTask(props.task)}}>X</Button>
       </ListItem>
     </List>
   </div>

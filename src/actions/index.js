@@ -1,5 +1,6 @@
 export const actionCollections = {
   ADD_TASK: "ADD_TASK",
+  DELETE_TASK: "DELETE_TASK",
   GET_TASK: "GET_TASK",
   GET_TASKS: "GET_TASKS",
   LOAD_TASK: "LOAD_TASK",
@@ -12,6 +13,14 @@ export const addTask = (params) => {
     type: actionCollections.ADD_TASK,
     title: params.title,
     callback: params.callback,
+  }
+}
+
+export const deleteTask = (task) => {
+  console.log("deleting...", task);
+  return {
+    type: actionCollections.DELETE_TASK,
+    task,
   }
 }
 
