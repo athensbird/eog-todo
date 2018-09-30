@@ -1,16 +1,39 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
+
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+
+import Checkbox from "@material-ui/core/Checkbox";
+import Typography from "@material-ui/core/Typography"
 
 import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
+  card: {
+    'background-color': '#f7f8f8',
+    display: 'flex',
+    width: '40%',
+    'margin-left': 'auto',
+    'margin-right': 'auto',
+    'margin-top': '1rem',
+    '&:hover': {
+      cursor: 'pointer',
+      opacity: 0.6,
+    },
+  },
+  completed: {
+    'background-color': '#DADEE5',
+    'text-decoration': 'line-through',
+  },
+  pending: {
+
+  },
   title: {
     'text-align': 'center',
+    width: '80%',
   },
   titleText: {
     color: 'rgb(200,100,25)',
@@ -33,32 +56,25 @@ const styles = (theme) => ({
 });
 
 const task = (props) => (
-  <div>
-    <List>
-      <ListItem
+    <Card className={props.classes.card}>
+      <CardContent
         className={props.classes.title}
         onClick={() => {props.history.push(`/task/${props.task.id}`)}}
       >
-        <ListItemText
-          className={props.classes.titleText}
-          primary={props.task.title}
-        />
-      </ListItem>
-      <ListItem
-        className={props.task.completed
-          ? props.classes.descriptionCompleted
-          : props.classes.descriptionPending
-        }>
-        <ListItemText primary={props.task.description}/>
+        <Typography
+          className={props.task.completed ? props.classes.completed : props.classes.pending}
+        >{props.task.title}
+        </Typography>
+      </CardContent>
+      <CardActions>
         <Checkbox
           checked={props.task.completed}
           disabled={props.task.completed}
           onChange={() => {props.completeTask({task: props.task})}}
         />
         <Button onClick={() => {props.deleteTask({task: props.task })}}>X</Button>
-      </ListItem>
-    </List>
-  </div>
+      </CardActions>
+    </Card>
 );
 
 export default withStyles(styles)(task);

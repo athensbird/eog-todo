@@ -1,6 +1,22 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
+import Typography from "@material-ui/core/Typography";
+
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = (theme) => ({
+  subtitle: {
+    'font-family': 'system-ui',
+    'font-size': '2rem',
+    'font-weight': '400',
+    'margin-bottom': '2rem',
+  },
+  submitButton: {
+    'background-color': '#F0F0F5',
+    'margin-left': '2rem',
+  },
+});
 
 class AddTask extends React.Component {
   constructor(props) {
@@ -34,7 +50,7 @@ class AddTask extends React.Component {
   render() {
     return (
       <div>
-        <h3>Add a task!</h3>
+        <Typography className={this.props.classes.subtitle}>Add a task!</Typography>
         <Input
           id="title"
           placeholder="Enter your title"
@@ -42,6 +58,7 @@ class AddTask extends React.Component {
           onChange={this.updateTitle}
         />
         <Button
+          className={this.props.classes.submitButton}
           onClick={this.submitTask}
         >Submit
         </Button>
@@ -50,4 +67,4 @@ class AddTask extends React.Component {
   }
 }
 
-export default AddTask;
+export default withStyles(styles)(AddTask);

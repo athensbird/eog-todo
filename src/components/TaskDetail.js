@@ -1,13 +1,20 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import Icon from "@material-ui/core/Icon";
+import Home from "@material-ui/icons/Home";
 import Grid from "@material-ui/core/Card";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 
-import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
+  backText: {
+    'font-size': '1.5rem',
+    'font-weight': '200',
+    'font-family': 'system-ui',
+  },
   complete: {
     'background-color': '#E4E4E4',
     'margin-left': '1rem',
@@ -22,6 +29,9 @@ const styles = {
   },
   delete: {
     'background-color': '#E57373',
+    'margin-right': '1rem',
+  },
+  icon: {
     'margin-right': '1rem',
   },
   row: {
@@ -133,7 +143,10 @@ class TaskDetail extends React.Component {
       <Grid className={classes.grid}>
         {this.state.task && <Grid container="true">
           <Paper className={classes.row}>
-            <Button onClick={this.navigateToList}>Back to Tasks</Button>
+            <Button onClick={this.navigateToList}>
+              <Icon className={classes.icon}><Home /></Icon>
+              <Typography className={classes.backText}>Back to Tasks</Typography>
+            </Button>
           </Paper>
           <Paper className={classes.row}>
             <TextField
