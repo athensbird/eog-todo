@@ -20,6 +20,11 @@ const store = createStore(
   enhancer,
 );
 
+// store.subscribe(() => {
+//   console.log("persisting state...");
+//   localStorage.setItem("taskDetail", JSON.stringify(store.getState()));
+// })
+
 sagaMiddleware.run(rootSaga);
 
 export default store;

@@ -62,11 +62,16 @@ class TaskDetail extends React.Component {
   }
 
   componentWillReceiveProps(nextprops) {
+    this.initState = nextprops;
     if (nextprops.task !== this.state.task) {
       this.setState({
         task: nextprops.task,
-      }, () => {
-        this.initState = this.state;
+      });
+    }
+    const persistedTask = localStorage.getItem("taskDetail");
+    if (persistedTask) {
+      this.setState({
+        task: JSON.parse(persistedTask),
       });
     }
   }
@@ -79,6 +84,7 @@ class TaskDetail extends React.Component {
     this.setState({ task: this.initState.task });
   }
   navigateToList() {
+    localStorage.removeItem("taskDetail");
     this.props.history.push('/task');
   }
   handleChange(field) {
@@ -88,8 +94,8 @@ class TaskDetail extends React.Component {
         task: {
           ...this.state.task,
           [field]: value,
-        }
-      });
+        },
+      }, () => this.persistTask(this.state.task));
     };
   }
   saveTask() {
@@ -101,6 +107,9 @@ class TaskDetail extends React.Component {
       task: this.state.task,
       callback: this.navigateToList,
     });
+  }
+  persistTask(task) {
+    localStorage.setItem("taskDetail", JSON.stringify(task));
   }
   completeTask() {
     this.props.completeTask({
@@ -124,7 +133,7 @@ class TaskDetail extends React.Component {
       <Grid className={classes.grid}>
         {this.state.task && <Grid container="true">
           <Paper className={classes.row}>
-            <Link to={"/task"}>Back to Tasks</Link>
+            <Button onClick={this.navigateToList}>Back to Tasks</Button>
           </Paper>
           <Paper className={classes.row}>
             <TextField
