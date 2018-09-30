@@ -95,7 +95,7 @@ class TaskDetail extends React.Component {
   }
   navigateToList() {
     localStorage.removeItem("taskDetail");
-    this.props.history.push('/task');
+    this.props.history.push('/');
   }
   handleChange(field) {
     return (event) => {

@@ -4,7 +4,6 @@ import completeTask from "../api/completeTask";
 import deleteTask from "../api/deleteTask";
 import getTasks from "../api/getTasks";
 import updateTask from "../api/updateTask";
-import { API, postHeaders, request } from "../api/config";
 import { actionCollections } from "../actions";
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
@@ -34,7 +33,6 @@ export function* watchUpdateTask(){
 }
 
 export function* addTaskSaga(action){
-  console.log("addTaskSaga working...");
   try {
     const res = yield call(addTask, action.title);
     yield call(loadTasksSaga, res);
@@ -47,7 +45,6 @@ export function* addTaskSaga(action){
 }
 
 export function* completeTaskSaga(action){
-  console.log("completeTaskSaga working...");
   try {
     const res = yield call(completeTask, action.task);
     yield call(delay, 100);
@@ -62,7 +59,6 @@ export function* completeTaskSaga(action){
 }
 
 export function* deleteTaskSaga(action){
-  console.log("deleteTaskSaga working...");
   try {
     const res = yield call(deleteTask, action.task);
     yield call(delay, 100);
@@ -80,7 +76,7 @@ export function* getTaskSaga(action){
   try {
     const res = yield call(getTasks);
     yield call(delay, 100);
-    const task = res.find(t => t.id == action.id);
+    const task = res.find(t => t.id === parseInt(action.id, 10));
     yield call(loadTaskSaga, task);
   } catch(error) {
     console.log(error);
@@ -99,7 +95,6 @@ export function* getTasksSaga(){
 }
 
 export function* updateTaskSaga(action){
-  console.log("updateTaskSaga triggered...");
   try {
     const res = yield call(updateTask, action.task);
     yield call(delay, 100);

@@ -6,6 +6,4 @@ const mapStateToProps = (state) => ({
   tasks: state.tasks,
 });
 
-export default connect(mapStateToProps,
-  { getTasks, completeTask, deleteTask })
-(TaskList);
+export default connect(mapStateToProps, { getTasks, completeTask, deleteTask })(TaskList);

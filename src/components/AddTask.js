@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
@@ -9,7 +9,7 @@ const styles = (theme) => ({
   subtitle: {
     'font-family': 'system-ui',
     'font-size': '2rem',
-    'font-weight': '400',
+    'font-weight': '200',
     'margin-bottom': '2rem',
   },
   submitButton: {

@@ -6,8 +6,8 @@ import AddTaskContainer from "../containers/AddTaskContainer";
 
 const Routes = () => (
   <div>
-    <Route exact path="/task" component={TaskListContainer} />
-    <Route exact path="/task" component={AddTaskContainer} />
+    <Route exact path="/" component={TaskListContainer} />
+    <Route exact path="/" component={AddTaskContainer} />
     <Route exact path="/task/:task_id" component={TaskDetailContainer} />
   </div>
 );

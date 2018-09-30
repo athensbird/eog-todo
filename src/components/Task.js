@@ -8,7 +8,6 @@ import CardActions from "@material-ui/core/CardActions";
 import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography"
 
-import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({

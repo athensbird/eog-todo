@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
-import { ADD_TASK } from '../actions';
 import { actionCollections } from '../actions';
-import { taskList } from '../data/tasks';
 
 const tasks = (state = {data: [], loading: false }, action) => {
   switch (action.type) {
